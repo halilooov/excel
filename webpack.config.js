@@ -27,6 +27,7 @@ const jsLoaders = () => {
 module.exports = {
     context: path.resolve(__dirname, 'src'),
     mode: 'development',
+    target: process.env.NODE_ENV === 'development' ? 'web' : 'browserslist',
     entry: ['@babel/polyfill', './index.js'],
     output: {
         filename: filename('js'),
@@ -45,7 +46,8 @@ module.exports = {
             target: process.env.NODE_ENV === 'development' ? 'web' : 'browserslist',
         },
         port: 3000,
-        hot: isDev
+        hot: isDev,
+        historyApiFallback: isDev,
     },
     plugins: [
         new CleanWebpackPlugin(),
